@@ -6,26 +6,38 @@ import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 
 const UsernameMenu = () => {
-    const {user, logout} = useAuth0();
+  const { user, logout } = useAuth0();
   return (
     <DropdownMenu>
-        <DropdownMenuTrigger className="flex items-center px-3 font-bold hover:text-orange-500">
-            <CircleUserRound className="text-orange-500" />
-            {user?.nickname}
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-            <DropdownMenuItem>
-            <Link to="/user-profile" className="font-bold hover:text-orange-500">
-                User Profile
-            </Link>
-            </DropdownMenuItem>
-            <Separator/>
-            <DropdownMenuItem>
-                <Button onClick={()=>logout()} className="flex flex-1 font-bold bg-orange-500">
-                    Logout
-                </Button>
-            </DropdownMenuItem>
-        </DropdownMenuContent>
+      <DropdownMenuTrigger className="flex items-center px-3 font-bold hover:text-orange-500">
+        <CircleUserRound className="text-orange-500" />
+        {user?.nickname}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem>
+          <Link to="/manage-restaurant" className="font-bold hover:text-orange-500">
+           Manage Restaurant
+          </Link>
+
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link to="/user-profile" className="font-bold hover:text-orange-500">
+            User Profile
+          </Link>
+
+        </DropdownMenuItem>
+
+        <Separator />
+        <DropdownMenuItem>
+          <Button onClick={() => logout({
+            logoutParams: {
+              returnTo: import.meta.env.VITE_AUTH0_CALLBACK_URL
+            }
+          })} className="flex flex-1 font-bold bg-orange-500">
+            Logout
+          </Button>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
     </DropdownMenu>
   )
 }
